@@ -1,0 +1,53 @@
+@use 'variables' as vars;
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == xs {
+    @media (max-width: vars.$breakpoint-xs) { @content; }
+  }
+
+  @if $breakpoint == sm {
+    @media (max-width: vars.$breakpoint-sm) { @content; }
+  }
+
+  @if $breakpoint == md {
+    @media (max-width: vars.$breakpoint-md) { @content; }
+  }
+
+  @if $breakpoint == lg {
+    @media (max-width: vars.$breakpoint-lg) { @content; }
+  }
+
+  @if $breakpoint == xl {
+    @media (max-width: vars.$breakpoint-xl) { @content; }
+  }
+}
+
+@mixin responsive-container {
+  max-width: vars.$size-content-max-w;
+  margin: 0 auto;
+  box-sizing: content-box;
+
+  padding-left: vars.$space-xl;
+  padding-right: vars.$space-xl;
+
+  @include respond(md) {
+    padding-left: vars.$space-m;
+    padding-right: vars.$space-m;
+  }
+  @include respond(sm) {
+    padding-left: vars.$space-s;
+    padding-right: vars.$space-s;
+  }
+}
+
+@mixin btn-secondary {
+  color: vars.$text-primary-color;
+  background-color: vars.$bg-color;
+  outline: 1px solid vars.$text-secondary-color;
+  outline-offset: -1px;
+
+  &:hover {
+    background-color: inherit;
+    opacity: 0.5;
+  }
+}

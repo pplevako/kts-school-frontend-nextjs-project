@@ -1,0 +1,17 @@
+@use '@styles/variables' as vars;
+
+.icon-container {
+  display: inline-flex;
+}
+
+.icon-primary {
+  color: var(--text-primary-color);
+}
+
+.icon-secondary {
+  color: var(--text-secondary-color);
+}
+
+.icon-accent {
+  color: vars.$text-accent-color;
+}

@@ -1,0 +1,46 @@
+/* Colors */
+$brand-color: #518581;
+$bg-color: #FFFFFF;
+$text-primary-color: #000000;
+$text-secondary-color: #AFADB5;
+$text-accent-color: $brand-color;
+$button-primary-bg-color: $brand-color;
+$button-primary-bg-hover-color: #86AAA7;
+$button-primary-bg-disabled-color:#D9D9D9;
+$button-primary-text: #FFFFFF;
+$card-bg-color: $bg-color;
+$card-image-bg-color: #D9D9D9;
+$input-bg-color: $bg-color;
+$input-bg-disabled-color: $bg-color;
+$input-placeholder-color: $text-secondary-color;
+$input-border-color: $bg-color;
+$input-border-disabled-color: $bg-color;
+$input-border-focus-color: $brand-color;
+$dropdown-options-bg-color: $bg-color;
+$checkbox-bg-color: $bg-color;
+$checkbox-check-color: $brand-color;
+$checkbox-check-disabled-color: #000000;
+$checkbox-border-hover-color: $brand-color;
+$color-main-bg: #FAFAFA;
+$badge-bg-color: $brand-color;
+$badge-text-color: #FFFFFF;
+
+/* Spacing */
+$space-xxs: 8px;
+$space-xs: 12px;
+$space-s: 16px;
+$space-m: 24px;
+$space-l: 32px;
+$space-xl: 48px;
+
+/* Sizing */
+$size-product-card-w: 360px;
+$size-content-max-w: 1240px;
+$size-btn-h: 52px;
+
+/* Breakpoints */
+$breakpoint-xs: 375px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1440px;

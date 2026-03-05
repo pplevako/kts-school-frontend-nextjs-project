@@ -1,0 +1,15 @@
+@use '@styles/variables' as vars;
+@use '@styles/mixins' as *;
+
+.cartControls {
+  display: flex;
+  align-items: center;
+  gap: vars.$space-s;
+}
+
+.btnQuantity {
+  @include btn-secondary;
+
+  padding: 0;
+  width: vars.$size-btn-h;
+}

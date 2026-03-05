@@ -1,0 +1,36 @@
+@use '@styles/variables' as vars;
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: vars.$brand-color;
+}
+
+.loader-size-s {
+  width: 24px;
+  height: 24px;
+}
+
+.loader-size-m {
+  width: 48px;
+  height: 48px;
+}
+
+.loader-size-l {
+  width: 60px;
+  height: 60px;
+}
+
+.loader .icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
