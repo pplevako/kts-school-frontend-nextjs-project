@@ -1,4 +1,5 @@
 import cx from 'clsx';
+import Image from 'next/image';
 import React from 'react';
 
 import './Card.scss';
@@ -38,7 +39,13 @@ const Card: React.FC<CardProps> = ({
     <div className={cx('card', className)} onClick={onClick} {...props}>
       <div className="card-header">
         <div className="card-image">
-          <img src={image} alt={typeof title === 'string' ? title : 'card image'} />
+          <Image
+            src={image}
+            alt={typeof title === 'string' ? title : 'card image'}
+            width={360}
+            height={360}
+            style={{ width: '100%', height: 'auto' }}
+          />
         </div>
       </div>
       <div className="card-body">

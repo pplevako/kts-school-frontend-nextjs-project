@@ -1,9 +1,9 @@
 import cx from 'clsx';
 import React from 'react';
 
-import Text from '@components/Text';
-import ArrowLeftIcon from '@components/icons/ArrowLeftIcon';
-import ArrowRightIcon from '@components/icons/ArrowRightIcon';
+import Text from '@/components/Text';
+import ArrowLeftIcon from '@/components/icons/ArrowLeftIcon';
+import ArrowRightIcon from '@/components/icons/ArrowRightIcon';
 
 import styles from './Pagination.module.scss';
 
@@ -33,10 +33,6 @@ const Pagination: React.FC<PaginationProps> = ({
       onPageChange(page + 1);
     }
   };
-
-  if (pageCount <= 1) {
-    return null;
-  }
 
   return (
     <div className={cx(styles.pagination, className)} {...props}>

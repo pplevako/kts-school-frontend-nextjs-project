@@ -1,72 +1,50 @@
-'use client';
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
-import { observer } from 'mobx-react-lite';
-import { useParams, useRouter } from 'next/navigation';
-import React, { useCallback, useEffect } from 'react';
+import { fetchProduct } from '@/api/products';
+import ProductModel from '@/models/ProductModel';
 
-import Button from '@components/Button';
-import CartControls from '@components/CartControls';
-import Text from '@components/Text/Text';
-import ArrowLeftIcon from '@components/icons/ArrowLeftIcon';
-import { useStore } from '@stores/StoreProvider';
+import ProductDetailClient from './_components/ProductDetailClient';
 
-import styles from './page.module.scss';
+type ProductDetailPageProps = {
+  params: Promise<{
+    documentId: string;
+  }>;
+};
 
-const ProductPage: React.FC = observer(() => {
-  const params = useParams();
-  const documentId = params.documentId as string;
-  const router = useRouter();
-  const { productStore } = useStore();
-  const { product } = productStore;
+export async function generateMetadata({ params }: ProductDetailPageProps): Promise<Metadata> {
+  const { documentId } = await params;
+  const productData = await fetchProduct(documentId);
 
-  useEffect(() => {
-    if (documentId) {
-      productStore.fetchProduct(documentId);
-    }
-    return () => productStore.reset();
-  }, [documentId, productStore]);
+  if (!productData) {
+    return {
+      title: 'Product Not Found',
+    };
+  }
 
-  const handleGoBack = useCallback(() => {
-    router.back();
-  }, [router]);
+  const product = new ProductModel(productData);
+  const primaryImage = product.getImageUrl();
 
-  if (productStore.loading) return <div>Loading...</div>;
-  if (!product) return <div>Product not found</div>;
+  return {
+    title: product.title,
+    description: product.description,
+    openGraph: {
+      title: product.title,
+      description: product.description,
+      images: primaryImage ? [primaryImage] : [],
+    },
+  };
+}
 
-  return (
-    <div className={styles.productPage}>
-      <nav className={styles.pageNav}>
-        <button onClick={handleGoBack} className={styles.backButton}>
-          <ArrowLeftIcon />
-          <Text view="p-20">Back</Text>
-        </button>
-      </nav>
-      <div className={styles.productContent}>
-        <div className={styles.productImage}>
-          <img src={product.getImageUrl({ format: 'medium' })} alt={product.title} />
-        </div>
-        <div className={styles.productDetail}>
-          <div>
-            <Text className={styles.productTitle} view="title" color="primary" weight="bold">
-              {product.title}
-            </Text>
-            <Text view="p-20" color="secondary">
-              {product.description}
-            </Text>
-          </div>
-          <div className={styles.productFooter}>
-            <Text view="title" color="primary" weight="bold">
-              {`$${product.price}`}
-            </Text>
-            <div className={styles.productActions}>
-              <Button>Buy Now</Button>
-              <CartControls product={product} buttonClassName={styles.btnAddToCard} />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-});
+export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
+  const { documentId } = await params;
+  const product = await fetchProduct(documentId);
 
-export default ProductPage;
+  if (!product) {
+    notFound();
+  }
+
+  const initialProduct = { product };
+
+  return <ProductDetailClient initialProduct={initialProduct} />;
+}

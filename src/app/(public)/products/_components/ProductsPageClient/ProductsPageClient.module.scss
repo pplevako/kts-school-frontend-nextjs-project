@@ -1,0 +1,19 @@
+@use '@/styles/variables' as vars;
+@use '@/styles/mixins' as *;
+
+.productListPage {
+  padding-top: 100px;
+  padding-bottom: 100px;
+
+  @include responsive-container;
+}
+
+.desc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: vars.$space-m;
+  max-width: 653px;
+  margin: 0 auto 50px auto;
+  text-align: center;
+}

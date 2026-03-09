@@ -1,5 +1,5 @@
 const routes = {
-  main: {
+  home: {
     create: () => '/',
   },
   products: {
@@ -7,6 +7,9 @@ const routes = {
   },
   product: {
     create: (documentId: string) => `/products/${documentId}`,
+  },
+  about: {
+    create: () => '/about',
   },
 };
 

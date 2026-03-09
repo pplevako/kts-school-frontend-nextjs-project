@@ -1,7 +1,12 @@
 import type { Metadata } from 'next';
-
-import { StoreProvider } from '@stores/StoreProvider';
+import { Roboto } from 'next/font/google';
 import './globals.scss';
+
+const roboto = Roboto({
+  weight: ['400', '500', '700'],
+  subsets: ['latin'],
+  variable: '--font-roboto',
+});
 
 export const metadata: Metadata = {
   title: 'Lalasia',
@@ -15,9 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <StoreProvider>{children}</StoreProvider>
-      </body>
+      <body className={roboto.variable}>{children}</body>
     </html>
   );
 }

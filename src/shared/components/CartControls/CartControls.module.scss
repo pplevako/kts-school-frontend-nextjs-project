@@ -1,5 +1,5 @@
-@use '@styles/variables' as vars;
-@use '@styles/mixins' as *;
+@use '@/styles/variables' as vars;
+@use '@/styles/mixins' as *;
 
 .cartControls {
   display: flex;
@@ -7,7 +7,7 @@
   gap: vars.$space-s;
 }
 
-.btnQuantity {
+:global(.btn).btnQuantity {
   @include btn-secondary;
 
   padding: 0;

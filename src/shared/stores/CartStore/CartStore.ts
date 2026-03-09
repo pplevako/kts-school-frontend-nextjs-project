@@ -1,37 +1,40 @@
+import type { IReactionDisposer } from 'mobx';
 import { makeAutoObservable, autorun, toJS } from 'mobx';
 
-import type ProductModel from '@stores/models/ProductModel';
+const CART_STORAGE_KEY = 'lalasia_cart';
 
-type CartItemModel = {
-  quantity: number;
-  product: ProductModel;
-};
-
-type StoredCartItemModel = {
+export class CartItem {
   id: number;
   quantity: number;
-  product: ReturnType<typeof toJS<ProductModel>>;
+
+  constructor(id: number, quantity = 1) {
+    this.id = id;
+    this.quantity = quantity;
+
+    makeAutoObservable(this);
+  }
+}
+
+type StoredCartItem = {
+  id: number;
+  quantity: number;
 };
 
 class CartStore {
-  private _items = new Map<number, CartItemModel>();
+  private _items = new Map<number, CartItem>();
+  private storageDisposer: IReactionDisposer | null = null;
 
   constructor() {
-    makeAutoObservable(this);
-    if (typeof window !== 'undefined') {
-      this.loadFromStorage();
-    }
-
-    autorun(() => {
-      this.saveToStorage();
+    makeAutoObservable<CartStore, 'storageDisposer'>(this, {
+      storageDisposer: false,
     });
   }
 
-  get items(): CartItemModel[] {
+  get items(): CartItem[] {
     return Array.from(this._items.values());
   }
 
-  getItem(productId: number): CartItemModel | undefined {
+  getItem(productId: number): CartItem | undefined {
     return this._items.get(productId);
   }
 
@@ -40,31 +43,20 @@ class CartStore {
   }
 
   increment(productId: number): void {
-    const item = this._items.get(productId);
-    if (item) {
-      item.quantity += 1;
-    }
+    this.changeItemQuantityBy(productId, 1);
   }
 
   decrement(productId: number): void {
-    const item = this._items.get(productId);
-    if (item) {
-      if (item.quantity > 1) {
-        item.quantity -= 1;
-      } else {
-        this._items.delete(productId);
-      }
-    }
+    this.changeItemQuantityBy(productId, -1);
   }
 
-  addItem(product: ProductModel, quantity = 1): void {
-    const id = product.id;
-    const existing = this._items.get(id);
-    if (existing) {
-      existing.quantity += quantity;
-      existing.product = product;
+  changeItemQuantityBy(productId: number, amount: number) {
+    const item = this.getItem(productId) || new CartItem(productId, 0);
+    item.quantity += amount;
+    if (item.quantity > 0) {
+      this._items.set(productId, item);
     } else {
-      this._items.set(id, { quantity, product });
+      this.removeItem(productId);
     }
   }
 
@@ -73,37 +65,44 @@ class CartStore {
   }
 
   get totalQuantity(): number {
-    let sum = 0;
-    for (const item of this._items.values()) {
-      sum += item.quantity;
+    return this.items.reduce((sum, item) => sum + item.quantity, 0);
+  }
+
+  init() {
+    if (typeof window === 'undefined') {
+      return;
     }
-    return sum;
+
+    this.loadFromStorage();
+
+    this.dispose();
+    this.storageDisposer = autorun(() => {
+      this.saveToStorage();
+    });
+  }
+
+  dispose() {
+    this.storageDisposer?.();
+    this.storageDisposer = null;
   }
 
   private loadFromStorage(): void {
-    const stored = localStorage.getItem('cart');
+    const stored = localStorage.getItem(CART_STORAGE_KEY);
     if (stored) {
       try {
-        const items: StoredCartItemModel[] = JSON.parse(stored);
+        const items: StoredCartItem[] = JSON.parse(stored);
         items.forEach((item) => {
-          this._items.set(item.id, {
-            quantity: item.quantity,
-            product: item.product as ProductModel,
-          });
+          this._items.set(item.id, new CartItem(item.id, item.quantity));
         });
-      } catch (e) {
-        console.error('Failed to load cart from localStorage', e);
+      } catch {
+        localStorage.removeItem(CART_STORAGE_KEY);
       }
     }
   }
 
   private saveToStorage(): void {
-    const items: StoredCartItemModel[] = Array.from(this._items.entries()).map(([id, value]) => ({
-      id,
-      quantity: value.quantity,
-      product: toJS(value.product),
-    }));
-    localStorage.setItem('cart', JSON.stringify(items));
+    const items: StoredCartItem[] = this.items.map((item) => toJS(item));
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
   }
 }
 

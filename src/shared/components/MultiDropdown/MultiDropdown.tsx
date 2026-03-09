@@ -117,6 +117,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
         onKeyDown={handleInputKeyDown}
         disabled={disabled}
         placeholder={getTitle(value)}
+        autoComplete="off"
         afterSlot={
           <ArrowDownIcon
             className={cx('multi-dropdown-icon', { 'multi-dropdown-icon-disabled': disabled })}

@@ -1,6 +1,5 @@
-'use client';
-
-import Header from '@components/Header';
+import Header from '@/components/Header';
+import { StoreProvider } from '@/providers/StoreProvider';
 
 export default function PublicLayout({
   children,
@@ -8,12 +7,9 @@ export default function PublicLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // TODO:
-    // <div className={styles.page}>
-    // <main className={styles.main}></main>
-    <>
+    <StoreProvider>
       <Header />
       <main>{children}</main>
-    </>
+    </StoreProvider>
   );
 }

@@ -2,10 +2,10 @@ import cx from 'clsx';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 
-import Button from '@components/Button';
-import Text from '@components/Text';
-import { useStore } from '@stores/StoreProvider';
-import type ProductModel from '@stores/models/ProductModel';
+import Button from '@/components/Button';
+import Text from '@/components/Text';
+import type ProductModel from '@/models/ProductModel';
+import { useStore } from '@/shared/providers/StoreProvider';
 
 import styles from './CartControls.module.scss';
 
@@ -25,7 +25,7 @@ const CartControls = observer(
           {!cartItem ? (
             <Button
               className={cx(styles.btnAdd, buttonClassName)}
-              onClick={() => cartStore.addItem(product)}
+              onClick={() => cartStore.increment(product.id)}
             >
               Add to Cart
             </Button>

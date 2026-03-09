@@ -20,11 +20,14 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@components/*": ["./src/shared/components/*"],
-      "@config/*": ["./src/shared/config/*"],
-      "@stores/*": ["./src/shared/stores/*"],
-      "@utils/*": ["./src/shared/utils/*"],
-      "@styles/*": ["./src/shared/styles/*"],
+      "@/api/*": ["./src/shared/api/*"],
+      "@/components/*": ["./src/shared/components/*"],
+      "@/config/*": ["./src/shared/config/*"],
+      "@/models/*": ["./src/shared/models/*"],
+      "@/providers/*": ["./src/shared/providers/*"],
+      "@/stores/*": ["./src/shared/stores/*"],
+      "@/styles/*": ["./src/shared/styles/*"],
+      "@/utils/*": ["./src/shared/utils/*"],
     }
   },
   "include": [

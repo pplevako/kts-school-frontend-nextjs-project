@@ -1,24 +1,31 @@
+'use client';
+
 import { observer } from 'mobx-react-lite';
 import NavLink from 'next-navlink';
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import Text from '@components/Text';
-import CartIcon from '@components/icons/CartIcon';
-import UserIcon from '@components/icons/UserIcon';
-import routes from '@config/routes';
-import { useStore } from '@stores/StoreProvider';
+import Text from '@/components/Text';
+import CartIcon from '@/components/icons/CartIcon';
+import UserIcon from '@/components/icons/UserIcon';
+import routes from '@/config/routes';
+import { useStore } from '@/shared/providers/StoreProvider';
 
 import styles from './Header.module.scss';
 
 const navItems = [
   { to: routes.products.create(), label: 'Products' },
   { to: '/categories', label: 'Categories' },
-  { to: '/about', label: 'About us' },
+  { to: routes.about.create(), label: 'About us' },
 ];
 
 const Header: React.FC = observer(() => {
   const { cartStore } = useStore();
   const { totalQuantity: cartItemCount } = cartStore;
+
+  useEffect(() => {
+    cartStore.init();
+    return () => cartStore.dispose();
+  }, [cartStore]);
 
   return (
     <header className={styles.header}>

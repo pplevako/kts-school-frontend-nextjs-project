@@ -1,0 +1,13 @@
+@use '@/styles/variables' as vars;
+
+.empty {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, vars.$size-product-card-w);
+  justify-content: center;
+  gap: 80px;
+}
