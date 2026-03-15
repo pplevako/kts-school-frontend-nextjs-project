@@ -1,0 +1,24 @@
+@use '@/styles/variables' as vars;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: vars.$space-l;
+  text-align: center;
+
+  p {
+    margin-bottom: vars.$space-l;
+  }
+}
+
+.code {
+  font-size: 4rem;
+  margin-bottom: vars.$space-s;
+}
+
+.action {
+  display: contents;
+}

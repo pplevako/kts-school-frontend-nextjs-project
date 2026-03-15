@@ -1,9 +1,6 @@
 'use client';
 
-import Button from '@/components/Button';
-import Text from '@/components/Text';
-
-import styles from './error.module.scss';
+import ErrorState from '@/components/ErrorState';
 
 export default function GlobalError({
   error,
@@ -12,13 +9,7 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  return (
-    <div className={styles.error}>
-      <Text view="p-20" weight="bold">
-        Something went wrong!
-      </Text>
-      <Text view="p-18">{error.message || 'An unexpected error occurred'}</Text>
-      <Button onClick={reset}>Try again</Button>
-    </div>
-  );
+  const isDev = process.env.NODE_ENV === 'development';
+
+  return <ErrorState message={isDev ? error.message : undefined} onRetry={reset} />;
 }

@@ -1,7 +1,7 @@
 import type { ProductsQueryParams } from '@/utils/queryBuilder';
 import { buildProductQuery, buildProductsQuery } from '@/utils/queryBuilder';
 
-import { apiRequest } from './client';
+import { ApiRequestError, apiRequest } from './client';
 import type { ProductsResponse, StrapiProduct } from './types';
 
 export async function fetchProducts(params: ProductsQueryParams = {}): Promise<ProductsResponse> {
@@ -10,13 +10,17 @@ export async function fetchProducts(params: ProductsQueryParams = {}): Promise<P
 }
 
 export async function fetchProduct(documentId: string): Promise<StrapiProduct | null> {
+  const queryString = buildProductQuery();
   try {
-    const queryString = buildProductQuery();
     const response = await apiRequest<{ data: StrapiProduct }>(
       `/products/${documentId}?${queryString}`
     );
     return response.data;
-  } catch {
-    return null;
+  } catch (e) {
+    if (e instanceof ApiRequestError && e.status === 404) {
+      return null;
+    }
+
+    throw e;
   }
 }
