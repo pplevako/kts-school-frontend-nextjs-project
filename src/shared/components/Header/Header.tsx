@@ -2,6 +2,7 @@
 
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
+import Link from 'next/link';
 import NavLink from 'next-navlink';
 import React, { useEffect } from 'react';
 
@@ -20,8 +21,9 @@ const navItems = [
 ];
 
 const Header: React.FC = observer(() => {
-  const { cartStore } = useStore();
+  const { cartStore, authStore } = useStore();
   const { totalQuantity: cartItemCount } = cartStore;
+  const { isAuthenticated, username } = authStore;
 
   useEffect(() => {
     cartStore.init();
@@ -62,7 +64,12 @@ const Header: React.FC = observer(() => {
               </span>
             )}
           </div>
-          <UserIcon />
+          <Link
+            href={isAuthenticated ? routes.profile.create() : routes.login.create()}
+            title={isAuthenticated ? username : 'Login'}
+          >
+            <UserIcon />
+          </Link>
         </div>
       </div>
     </header>

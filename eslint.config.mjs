@@ -21,7 +21,9 @@ const eslintConfig = defineConfig([
     extends: [tseslint.configs.strict, tseslint.configs.stylistic],
     languageOptions: {
       parserOptions: {
-        projectService: true,
+        projectService: {
+          allowDefaultProject: ["src/*.d.ts"],
+        },
         tsconfigRootDir: import.meta.dirname,
       },
     },
@@ -34,6 +36,13 @@ const eslintConfig = defineConfig([
       "@typescript-eslint/no-unused-vars": "error",
       "@typescript-eslint/no-unnecessary-boolean-literal-compare": "warn",
       "@typescript-eslint/no-unnecessary-condition": "warn",
+    },
+  },
+  {
+    // Declaration files use interface for module augmentation (declaration merging)
+    files: ["**/*.d.ts"],
+    rules: {
+      "@typescript-eslint/consistent-type-definitions": "off",
     },
   },
   {

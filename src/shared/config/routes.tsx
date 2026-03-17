@@ -11,6 +11,15 @@ const routes = {
   about: {
     create: () => '/about',
   },
+  login: {
+    create: () => '/login',
+  },
+  register: {
+    create: () => '/register',
+  },
+  profile: {
+    create: () => '/profile',
+  },
 };
 
 export default routes;

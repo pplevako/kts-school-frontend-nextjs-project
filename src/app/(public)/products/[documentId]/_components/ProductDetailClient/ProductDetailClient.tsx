@@ -54,9 +54,8 @@ const ProductDetailView = observer(function ProductDetailView() {
           <Image
             src={product.getImageUrl()}
             alt={product.title}
-            width={600}
-            height={600}
-            style={{ width: '100%', height: 'auto' }}
+            fill
+            style={{ objectFit: 'cover' }}
             priority
           />
         </div>

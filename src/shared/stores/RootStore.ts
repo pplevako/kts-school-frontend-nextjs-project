@@ -1,4 +1,5 @@
 import '@/config/configureMobX';
+import AuthStore from './AuthStore';
 import CartStore from './CartStore';
 import ProductCategoriesStore from './ProductCategoriesStore';
 import ProductFiltersStore from './ProductFiltersStore';
@@ -6,6 +7,7 @@ import ProductListStore from './ProductListStore';
 import ProductStore from './ProductStore';
 
 class RootStore {
+  authStore: AuthStore;
   categoriesStore: ProductCategoriesStore;
   filtersStore: ProductFiltersStore;
   productListStore: ProductListStore;
@@ -13,6 +15,7 @@ class RootStore {
   cartStore: CartStore;
 
   constructor() {
+    this.authStore = new AuthStore();
     this.categoriesStore = new ProductCategoriesStore();
     this.filtersStore = new ProductFiltersStore();
     this.productListStore = new ProductListStore();
