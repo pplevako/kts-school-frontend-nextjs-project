@@ -1,26 +1,14 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
-import type { AuthState } from '@/stores/AuthStore';
 import RootStore from '@/stores/RootStore';
 
 const StoreContext = createContext<RootStore | null>(null);
 
-type StoreProviderProps = {
-  children: ReactNode;
-  initialAuth?: AuthState;
-};
-
-export function StoreProvider({ children, initialAuth }: StoreProviderProps) {
+export function StoreProvider({ children }: { children: ReactNode }) {
   const [store] = useState(() => new RootStore());
-
-  useEffect(() => {
-    if (initialAuth) {
-      store.authStore.hydrate(initialAuth);
-    }
-  }, [store, initialAuth]);
 
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;
 }

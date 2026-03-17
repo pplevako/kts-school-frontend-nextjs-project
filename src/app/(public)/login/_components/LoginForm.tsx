@@ -38,7 +38,6 @@ export default function LoginForm() {
       }
 
       router.push(routes.profile.create());
-      router.refresh();
     } catch {
       setError('An error occurred. Please try again.');
       setLoading(false);
@@ -52,6 +51,7 @@ export default function LoginForm() {
         onChange={setIdentifier}
         placeholder="Email"
         type="email"
+        autoComplete="username"
         disabled={loading}
       />
       <Input
@@ -59,6 +59,7 @@ export default function LoginForm() {
         onChange={setPassword}
         placeholder="Password"
         type="password"
+        autoComplete="current-password"
         disabled={loading}
       />
       {error && <Text className={styles.error}>{error}</Text>}

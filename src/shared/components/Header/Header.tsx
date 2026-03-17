@@ -3,6 +3,7 @@
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import NavLink from 'next-navlink';
 import React, { useEffect } from 'react';
 
@@ -21,9 +22,11 @@ const navItems = [
 ];
 
 const Header: React.FC = observer(() => {
-  const { cartStore, authStore } = useStore();
+  const { cartStore } = useStore();
   const { totalQuantity: cartItemCount } = cartStore;
-  const { isAuthenticated, username } = authStore;
+  const { data: session } = useSession();
+  const isAuthenticated = !!session?.user;
+  const username = session?.user?.name ?? '';
 
   useEffect(() => {
     cartStore.init();

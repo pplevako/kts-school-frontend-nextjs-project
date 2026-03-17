@@ -43,7 +43,6 @@ export default function RegisterForm() {
       }
 
       router.push(routes.profile.create());
-      router.refresh();
     } catch (e) {
       if (e instanceof ApiRequestError && e.status === 400) {
         setError('Email already in use');
@@ -62,6 +61,7 @@ export default function RegisterForm() {
         onChange={setEmail}
         placeholder="Email"
         type="email"
+        autoComplete="username"
         disabled={loading}
       />
       <Input
@@ -69,6 +69,7 @@ export default function RegisterForm() {
         onChange={setPassword}
         placeholder="Password"
         type="password"
+        autoComplete="new-password"
         disabled={loading}
       />
       {error && <Text className={styles.error}>{error}</Text>}
