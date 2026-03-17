@@ -2,6 +2,7 @@
 
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect } from 'react';
 
@@ -25,12 +26,10 @@ const ProductDetailView = observer(function ProductDetailView() {
 
   const handleGoBack = useCallback(() => {
     // Fallback for direct entry / new tab: there may be no meaningful in-app history to go back to.
-    if (typeof window !== 'undefined' && window.history.length > 1) {
+    if (typeof window !== 'undefined' && window.history.length > 2) {
       router.back();
       return;
     }
-
-    router.replace(routes.products.create());
   }, [router]);
 
   if (!product) return null;
@@ -38,11 +37,11 @@ const ProductDetailView = observer(function ProductDetailView() {
   return (
     <div className={styles.productPage}>
       <nav className={styles.breadcrumbs}>
-        <span onClick={handleGoBack}>
+        <Link href={routes.products.create()} onClick={handleGoBack}>
           <Text view="p-18" tag="span">
             Products
           </Text>
-        </span>
+        </Link>
         <Text view="p-18" tag="span">
           /
         </Text>

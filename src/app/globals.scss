@@ -15,6 +15,15 @@ html, body {
   min-height: 100vh;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: vars.$brand-color !important;
+  }
+}
+
 body {
   display: flex;
   flex-direction: column;

@@ -5,7 +5,7 @@ import React from 'react';
 import Button from '@/components/Button';
 import Text from '@/components/Text';
 import type ProductModel from '@/models/ProductModel';
-import { useStore } from '@/shared/providers/StoreProvider';
+import { useStore } from '@/providers/StoreProvider';
 
 import styles from './CartControls.module.scss';
 

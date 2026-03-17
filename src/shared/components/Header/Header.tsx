@@ -1,6 +1,7 @@
 'use client';
 
 import { observer } from 'mobx-react-lite';
+import Image from 'next/image';
 import NavLink from 'next-navlink';
 import React, { useEffect } from 'react';
 
@@ -8,7 +9,7 @@ import Text from '@/components/Text';
 import CartIcon from '@/components/icons/CartIcon';
 import UserIcon from '@/components/icons/UserIcon';
 import routes from '@/config/routes';
-import { useStore } from '@/shared/providers/StoreProvider';
+import { useStore } from '@/providers/StoreProvider';
 
 import styles from './Header.module.scss';
 
@@ -31,7 +32,7 @@ const Header: React.FC = observer(() => {
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.logo}>
-          <img src="/logo.svg" alt="Lalasia logo" />
+          <Image src="/logo.svg" alt="Lalasia logo" width={32} height={32} />
           <Text className={styles.logoBrand} view="p-20" tag="span" color="primary" weight="bold">
             Lalasia
           </Text>
@@ -44,11 +45,9 @@ const Header: React.FC = observer(() => {
               className={styles.navLink}
               activeClassName={styles.active}
             >
-              {(isActive) => (
-                <Text view="p-18" tag="span" color={isActive ? 'accent' : 'primary'}>
-                  {item.label}
-                </Text>
-              )}
+              <Text view="p-18" tag="span">
+                {item.label}
+              </Text>
             </NavLink>
           ))}
         </nav>

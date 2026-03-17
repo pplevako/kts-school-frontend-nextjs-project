@@ -13,13 +13,6 @@
   gap: vars.$space-xxs;
   margin-bottom: vars.$space-l;
   color: vars.$text-secondary-color;
-
-  span:first-child {
-    cursor: pointer;
-    &:hover {
-      color: vars.$brand-color;
-    }
-  }
 }
 
 .productContent {

@@ -9,8 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@types/lodash": "^4.17.24",
-    "axios": "^1.13.6",
     "clsx": "^2.1.1",
     "lodash": "^4.17.23",
     "mobx": "^6.15.0",
@@ -22,6 +20,7 @@
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.24",
     "@types/node": "^20",
     "@types/qs": "^6.14.0",
     "@types/react": "^19",
