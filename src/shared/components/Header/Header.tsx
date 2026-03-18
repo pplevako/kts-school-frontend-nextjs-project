@@ -36,12 +36,12 @@ const Header: React.FC = observer(() => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <div className={styles.logo}>
+        <Link href={routes.home.create()} className={styles.logo}>
           <Image src="/logo.svg" alt="Lalasia logo" width={32} height={32} />
-          <Text className={styles.logoBrand} view="p-20" tag="span" color="primary" weight="bold">
+          <Text className={styles.logoBrand} view="p-20" tag="span" weight="bold">
             Lalasia
           </Text>
-        </div>
+        </Link>
         <nav className={styles.nav}>
           {navItems.map((item) => (
             <NavLink

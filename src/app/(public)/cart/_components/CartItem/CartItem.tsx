@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import Button from '@/components/Button';
 import CartControls from '@/components/CartControls';
+import ProductPrice from '@/components/ProductPrice';
 import Text from '@/components/Text';
 import routes from '@/config/routes';
 import type ProductModel from '@/models/ProductModel';
@@ -32,9 +33,11 @@ const CartItem: React.FC<CartItemProps> = ({ product, isDeleted, onRemove, onRes
           <Text view="p-20" weight="medium" className={styles.itemTitle}>
             {product.title}
           </Text>
-          <Text view="p-18" color="secondary">
-            {product.formattedPrice}
-          </Text>
+          <ProductPrice
+            price={product.price}
+            discountedPrice={product.discountedPrice}
+            weight="normal"
+          />
         </div>
       </div>
     </Link>
