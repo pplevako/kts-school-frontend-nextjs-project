@@ -36,3 +36,14 @@
 .itemTitle {
   max-width: 400px;
 }
+
+.itemActions {
+  display: flex;
+  align-items: center;
+  gap: vars.$space-m;
+}
+
+.lineTotal {
+  min-width: 80px;
+  text-align: right;
+}
