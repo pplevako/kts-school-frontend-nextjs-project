@@ -81,6 +81,10 @@ class CartStore {
     });
   }
 
+  get itemIds() {
+    return Array.from(this._items.keys());
+  }
+
   dispose() {
     this.storageDisposer?.();
     this.storageDisposer = null;

@@ -1,0 +1,68 @@
+@use '@/styles/variables' as vars;
+@use '@/styles/mixins' as *;
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+@mixin shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: 4px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-m;
+}
+
+.item {
+  @include widget-borders;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: vars.$space-m;
+  background: vars.$bg-color;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  gap: vars.$space-m;
+}
+
+.image {
+  @include shimmer;
+  @include widget-radius;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-xxs;
+}
+
+.title {
+  @include shimmer;
+  width: 240px;
+  height: 24px;
+}
+
+.price {
+  @include shimmer;
+  width: 80px;
+  height: 20px;
+}
+
+.controls {
+  @include shimmer;
+  @include widget-radius;
+  width: 120px;
+  height: 52px;
+}
