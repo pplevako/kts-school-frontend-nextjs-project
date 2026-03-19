@@ -1,4 +1,5 @@
 @use '@/styles/variables' as vars;
+@use '@/styles/mixins' as *;
 
 :root {
   font-family: 'Roboto';
@@ -16,6 +17,7 @@ html, body {
 }
 
 a {
+  @include transition(color);
   color: inherit;
   text-decoration: none;
 

@@ -3,12 +3,12 @@
 
 .item {
   @include widget-borders;
+  @include transition(opacity);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: vars.$space-m;
   background: vars.$bg-color;
-  transition: opacity 0.2s ease;
 }
 
 .itemMain {

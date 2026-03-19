@@ -53,7 +53,12 @@
   @include widget-shadow;
 }
 
+@mixin transition($properties: all, $duration: 0.2s, $timing: ease) {
+  transition: $properties $duration $timing;
+}
+
 @mixin btn-secondary {
+  @include transition(opacity);
   color: vars.$text-primary-color;
   background-color: vars.$bg-color;
   outline: 1px solid vars.$text-secondary-color;

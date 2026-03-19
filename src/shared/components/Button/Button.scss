@@ -1,6 +1,8 @@
 @use '@/styles/variables' as vars;
+@use '@/styles/mixins' as *;
 
 .btn {
+  @include transition(background-color);
   display: inline-flex;
   align-items: center;
   justify-content: center;
