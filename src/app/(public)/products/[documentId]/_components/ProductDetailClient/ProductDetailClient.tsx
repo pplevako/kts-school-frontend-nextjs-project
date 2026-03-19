@@ -1,12 +1,12 @@
 'use client';
 
 import { observer } from 'mobx-react-lite';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect } from 'react';
 
 import Button from '@/components/Button';
 import CartControls from '@/components/CartControls';
+import ImageGallery from '@/components/ImageGallery';
 import ProductPrice from '@/components/ProductPrice';
 import Text from '@/components/Text/Text';
 import routes from '@/config/routes';
@@ -41,15 +41,7 @@ const ProductDetailView = observer(function ProductDetailView() {
         </Text>
       </nav>
       <div className={styles.productContent}>
-        <div className={styles.productImage}>
-          <Image
-            src={product.getImageUrl()}
-            alt={product.title}
-            fill
-            style={{ objectFit: 'cover' }}
-            priority
-          />
-        </div>
+        <ImageGallery images={product.images} className={styles.productImage} />
         <div className={styles.productDetail}>
           <div>
             <Text className={styles.productTitle} view="title" color="primary" weight="bold">
