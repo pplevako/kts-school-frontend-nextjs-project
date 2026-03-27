@@ -1,0 +1,19 @@
+@use '@/styles/variables' as vars;
+
+.pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: vars.$space-xs;
+}
+
+.pageChangeBtn {
+  background: none;
+  border: none;
+  color: vars.$text-primary-color;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}

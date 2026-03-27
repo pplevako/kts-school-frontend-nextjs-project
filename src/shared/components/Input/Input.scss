@@ -1,0 +1,48 @@
+@use '@/styles/variables' as vars;
+
+.input-container  {
+  display: inline-block;
+  position: relative;
+  width: 368px;
+}
+
+.input-container input {
+  width: 100%;
+  min-height: 52px;
+  padding: vars.$space-s vars.$space-xs;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: vars.$input-bg-color;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0;
+  border-color: vars.$input-border-color;
+}
+
+.input-container input::placeholder {
+  color: vars.$input-placeholder-color;
+  opacity: 1; /* Firefox defaults to a lower opacity, so this ensures consistency */
+}
+
+.input-container input:focus {
+  border-color: vars.$input-border-focus-color;
+  outline-style: none;
+}
+
+.input-container input:disabled {
+  background-color: vars.$input-bg-disabled-color;
+  border-color: vars.$input-border-disabled-color;
+}
+
+.input-container[data-has-icon="true"] input {
+  padding-right: calc(vars.$space-xxs) + vars.$space-xs + 24px;
+}
+
+.input-container .input-icon {
+  position: absolute;
+  right: vars.$space-xs;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}

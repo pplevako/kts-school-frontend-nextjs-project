@@ -1,0 +1,71 @@
+@use '@/styles/variables' as vars;
+
+/* Стили для view */
+.text-view-title {
+  font-size: 44px;
+  line-height: 48px;
+}
+
+.text-view-button {
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.text-view-p-32 {
+  font-size: 32px;
+  line-height: 36px;
+}
+
+.text-view-p-20 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.text-view-p-18 {
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.text-view-p-16 {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.text-view-p-14 {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+/* Стили для weight (имеют приоритет через !important) */
+.text-weight-normal {
+  font-weight: 400 !important;
+}
+
+.text-weight-medium {
+  font-weight: 500 !important;
+}
+
+.text-weight-bold {
+  font-weight: 700 !important;
+}
+
+/* Стили для color */
+.text-color-primary {
+  color: vars.$text-primary-color;
+}
+
+.text-color-secondary {
+  color: vars.$text-secondary-color;
+}
+
+.text-color-accent {
+  color: vars.$text-accent-color;
+}
+
+/* Ограничение строк */
+.text-max-lines {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

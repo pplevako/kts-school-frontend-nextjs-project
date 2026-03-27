@@ -1,0 +1,23 @@
+@use '@/styles/variables' as vars;
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-m;
+  margin-bottom: vars.$space-xl;
+}
+
+.totalProducts {
+  display: flex;
+  align-items: center;
+  gap: vars.$space-m;
+  margin-bottom: vars.$space-xl;
+}
+
+.search {
+  width: 100%;
+}
+
+.categories {
+  align-self: flex-start;
+}
