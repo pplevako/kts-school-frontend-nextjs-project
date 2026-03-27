@@ -12,13 +12,22 @@ import styles from './CartControls.module.scss';
 type CartControlsProps = React.HTMLAttributes<HTMLDivElement> & {
   product: ProductModel;
   buttonClassName?: string;
+  onRemove?: () => void;
 };
 
 const CartControls = observer(
   React.forwardRef<HTMLDivElement, CartControlsProps>(
-    ({ product, className, buttonClassName, ...props }, ref) => {
+    ({ product, className, buttonClassName, onRemove, ...props }, ref) => {
       const { cartStore } = useStore();
       const cartItem = cartStore.getItem(product.id);
+
+      const handleDecrement = () => {
+        if (onRemove && cartItem?.quantity === 1) {
+          onRemove();
+        } else {
+          cartStore.decrement(product.id);
+        }
+      };
 
       return (
         <div className={cx(styles.cartControls, className)} ref={ref} {...props}>
@@ -31,10 +40,7 @@ const CartControls = observer(
             </Button>
           ) : (
             <>
-              <Button
-                className={styles.btnQuantity}
-                onClick={() => cartStore.decrement(product.id)}
-              >
+              <Button className={styles.btnQuantity} onClick={handleDecrement}>
                 <Text tag="span" view="p-32">
                   –
                 </Text>

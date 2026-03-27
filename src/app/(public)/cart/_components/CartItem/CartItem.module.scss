@@ -1,0 +1,38 @@
+@use '@/styles/variables' as vars;
+@use '@/styles/mixins' as *;
+
+.item {
+  @include widget-borders;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: vars.$space-m;
+  background: vars.$bg-color;
+  transition: opacity 0.2s ease;
+}
+
+.itemMain {
+  display: flex;
+  align-items: center;
+  gap: vars.$space-m;
+}
+
+.itemImage {
+  @include widget-radius;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-xxs;
+}
+
+.itemDeleted {
+  opacity: 0.5;
+}
+
+.itemTitle {
+  max-width: 400px;
+}

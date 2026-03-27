@@ -20,6 +20,9 @@ const routes = {
   profile: {
     create: () => '/profile',
   },
+  cart: {
+    create: () => '/cart',
+  },
 };
 
 export default routes;

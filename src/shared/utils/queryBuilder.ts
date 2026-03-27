@@ -61,3 +61,13 @@ export function buildProductQuery(): string {
 
   return qs.stringify(query, { encodeValuesOnly: true });
 }
+
+export function buildProductsByIdsQuery(ids: number[]): string {
+  const query: StrapiQuery = {
+    pagination: { pageSize: ids.length },
+    populate: ['images', 'productCategory'],
+    filters: { id: { $in: ids } },
+  };
+
+  return qs.stringify(query, { encodeValuesOnly: true });
+}

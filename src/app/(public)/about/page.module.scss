@@ -1,3 +1,6 @@
+@use '@/styles/variables' as vars;
+@use '@/styles/mixins' as *;
+
 .container {
   max-width: 900px;
   margin: 0 auto;
@@ -51,9 +54,9 @@
 }
 
 .value {
+  @include widget-borders;
   padding: 1.5rem;
   background: #f9f9f9;
-  border-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;

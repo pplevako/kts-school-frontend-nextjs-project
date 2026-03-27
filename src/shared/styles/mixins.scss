@@ -40,6 +40,19 @@
   }
 }
 
+@mixin widget-radius {
+  border-radius: vars.$radius-widget;
+}
+
+@mixin widget-shadow {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@mixin widget-borders {
+  @include widget-radius;
+  @include widget-shadow;
+}
+
 @mixin btn-secondary {
   color: vars.$text-primary-color;
   background-color: vars.$bg-color;

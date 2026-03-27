@@ -1,10 +1,13 @@
 @use '@/styles/variables' as vars;
+@use '@/styles/mixins' as *;
 
 .card {
+  @include widget-radius;
   display: flex;
   flex-direction: column;
   width: vars.$size-product-card-w;
   background-color: vars.$card-bg-color;
+  overflow: hidden;
 }
 
 .card:hover {

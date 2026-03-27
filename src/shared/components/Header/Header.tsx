@@ -57,7 +57,7 @@ const Header: React.FC = observer(() => {
           ))}
         </nav>
         <div className={styles.userActions}>
-          <div className={styles.cartIconContainer}>
+          <Link href={routes.cart.create()} className={styles.cartIconContainer}>
             <CartIcon />
             {cartItemCount > 0 && (
               <span className={styles.cartBadge}>
@@ -66,7 +66,7 @@ const Header: React.FC = observer(() => {
                 </Text>
               </span>
             )}
-          </div>
+          </Link>
           <Link
             href={isAuthenticated ? routes.profile.create() : routes.login.create()}
             title={isAuthenticated ? username : 'Login'}
