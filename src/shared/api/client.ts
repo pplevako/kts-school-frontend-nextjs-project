@@ -16,7 +16,6 @@ export async function apiRequest<T>(endpoint: string, options?: RequestInit): Pr
   const url = `${API_BASE}${endpoint}`;
 
   const response = await fetch(url, {
-    next: { revalidate: 60 },
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -33,4 +32,18 @@ export async function apiRequest<T>(endpoint: string, options?: RequestInit): Pr
   }
 
   return await response.json();
+}
+
+export async function authenticatedRequest<T>(
+  endpoint: string,
+  token: string,
+  options?: RequestInit
+): Promise<T> {
+  return apiRequest<T>(endpoint, {
+    ...options,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      ...options?.headers,
+    },
+  });
 }

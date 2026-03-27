@@ -1,4 +1,5 @@
 import Header from '@/components/Header';
+import AuthProvider from '@/providers/AuthProvider';
 import { StoreProvider } from '@/providers/StoreProvider';
 
 export default function PublicLayout({
@@ -7,9 +8,11 @@ export default function PublicLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <StoreProvider>
-      <Header />
-      <main>{children}</main>
-    </StoreProvider>
+    <AuthProvider>
+      <StoreProvider>
+        <Header />
+        <main>{children}</main>
+      </StoreProvider>
+    </AuthProvider>
   );
 }

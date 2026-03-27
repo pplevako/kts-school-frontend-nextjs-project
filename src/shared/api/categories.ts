@@ -13,5 +13,7 @@ export async function fetchCategories(): Promise<CategoriesResponse> {
     { encodeValuesOnly: true }
   );
 
-  return apiRequest<CategoriesResponse>(`/product-categories?${query}`);
+  return apiRequest<CategoriesResponse>(`/product-categories?${query}`, {
+    next: { revalidate: 60 },
+  });
 }
