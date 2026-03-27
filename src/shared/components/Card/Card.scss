@@ -3,6 +3,7 @@
 
 .card {
   @include widget-radius;
+  @include transition(box-shadow);
   display: flex;
   flex-direction: column;
   width: vars.$size-product-card-w;

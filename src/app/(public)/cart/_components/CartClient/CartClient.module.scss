@@ -18,6 +18,15 @@
   gap: vars.$space-m;
 }
 
+.summary {
+  @include widget-borders;
+  display: flex;
+  justify-content: flex-end;
+  padding: vars.$space-m;
+  background: vars.$bg-color;
+  margin-top: vars.$space-m;
+}
+
 .empty {
   display: flex;
   flex-direction: column;

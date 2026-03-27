@@ -3,12 +3,13 @@
 
 .item {
   @include widget-borders;
+  @include transition(opacity);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding: vars.$space-m;
   background: vars.$bg-color;
-  transition: opacity 0.2s ease;
 }
 
 .itemMain {
@@ -35,4 +36,16 @@
 
 .itemTitle {
   max-width: 400px;
+}
+
+.itemActions {
+  display: flex;
+  align-items: center;
+  gap: vars.$space-m;
+
+  @include respond(lg) {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: vars.$space-s;
+  }
 }

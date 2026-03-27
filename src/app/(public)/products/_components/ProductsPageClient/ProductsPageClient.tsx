@@ -49,16 +49,14 @@ function ProductsPageClient({
 
   useEffect(() => {
     categoriesStore.hydrate(initialCategories);
-    filtersStore.hydrate(initialFilters);
     productListStore.hydrate(initialProducts);
-  }, [
-    initialCategories,
-    initialFilters,
-    initialProducts,
-    categoriesStore,
-    filtersStore,
-    productListStore,
-  ]);
+  }, [initialCategories, initialProducts, categoriesStore, productListStore]);
+
+  useEffect(() => {
+    // Hydrate filters only once on mount
+    filtersStore.hydrate(initialFilters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filtersStore]);
 
   return <ProductsPageView />;
 }

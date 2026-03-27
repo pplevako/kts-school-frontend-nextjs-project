@@ -5,6 +5,7 @@ import React, { useRef } from 'react';
 
 import Card from '@/components/Card';
 import CartControls from '@/components/CartControls';
+import ProductPrice from '@/components/ProductPrice';
 import routes from '@/config/routes';
 import type ProductModel from '@/models/ProductModel';
 
@@ -31,7 +32,7 @@ const ProductListItem: React.FC<ProductListItemProps> = ({ product }) => {
       title={product.title}
       subtitle={product.description}
       captionSlot={product.categoryTitle}
-      contentSlot={product.formattedPrice}
+      contentSlot={<ProductPrice price={product.price} discountedPrice={product.discountedPrice} />}
       onClick={handleCardClick}
       actionSlot={<CartControls product={product} ref={cartControlsRef} />}
     />

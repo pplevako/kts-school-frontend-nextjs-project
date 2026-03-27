@@ -1,13 +1,13 @@
 'use client';
 
 import { observer } from 'mobx-react-lite';
-import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import Button from '@/components/Button';
 import CartControls from '@/components/CartControls';
+import ImageGallery from '@/components/ImageGallery';
+import ProductPrice from '@/components/ProductPrice';
 import Text from '@/components/Text/Text';
 import routes from '@/config/routes';
 import { useStore } from '@/providers/StoreProvider';
@@ -20,24 +20,15 @@ type ProductDetailClientProps = {
 };
 
 const ProductDetailView = observer(function ProductDetailView() {
-  const router = useRouter();
   const { productStore } = useStore();
   const { product } = productStore;
-
-  const handleGoBack = useCallback(() => {
-    // Fallback for direct entry / new tab: there may be no meaningful in-app history to go back to.
-    if (typeof window !== 'undefined' && window.history.length > 2) {
-      router.back();
-      return;
-    }
-  }, [router]);
 
   if (!product) return null;
 
   return (
     <div className={styles.productPage}>
       <nav className={styles.breadcrumbs}>
-        <Link href={routes.products.create()} onClick={handleGoBack}>
+        <Link href={routes.products.create()}>
           <Text view="p-18" tag="span">
             Products
           </Text>
@@ -50,15 +41,7 @@ const ProductDetailView = observer(function ProductDetailView() {
         </Text>
       </nav>
       <div className={styles.productContent}>
-        <div className={styles.productImage}>
-          <Image
-            src={product.getImageUrl()}
-            alt={product.title}
-            fill
-            style={{ objectFit: 'cover' }}
-            priority
-          />
-        </div>
+        <ImageGallery images={product.images} className={styles.productImage} />
         <div className={styles.productDetail}>
           <div>
             <Text className={styles.productTitle} view="title" color="primary" weight="bold">
@@ -69,9 +52,11 @@ const ProductDetailView = observer(function ProductDetailView() {
             </Text>
           </div>
           <div className={styles.productFooter}>
-            <Text view="title" color="primary" weight="bold">
-              {product.formattedPrice}
-            </Text>
+            <ProductPrice
+              price={product.price}
+              discountedPrice={product.discountedPrice}
+              view="title"
+            />
             <div className={styles.productActions}>
               <Button>Buy Now</Button>
               <CartControls product={product} buttonClassName={styles.btnAddToCard} />

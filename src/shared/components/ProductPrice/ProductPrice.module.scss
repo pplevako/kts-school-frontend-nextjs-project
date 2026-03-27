@@ -1,0 +1,18 @@
+@use '@/styles/variables' as vars;
+
+.priceContainer {
+  display: flex;
+  align-items: center;
+}
+
+.viewP18 {
+  gap: vars.$space-xxs;
+}
+
+.viewTitle {
+  gap: vars.$space-s;
+}
+
+.originalPrice {
+  text-decoration: line-through;
+}

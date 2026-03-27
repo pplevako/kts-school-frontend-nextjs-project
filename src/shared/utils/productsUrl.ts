@@ -23,9 +23,12 @@ export function buildProductsUrl({
     }
   }
 
-  if (categories) {
-    params.delete('categories');
-    categories.forEach((id) => params.append('categories', id));
+  if (categories !== undefined) {
+    if (categories.length > 0) {
+      params.set('categories', categories.join(','));
+    } else {
+      params.delete('categories');
+    }
   }
 
   if (page !== undefined) {

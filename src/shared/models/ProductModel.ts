@@ -1,4 +1,5 @@
 import type { StrapiProduct } from '@/api/types';
+import { formatPrice } from '@/utils/format';
 
 import ProductCategoryModel from './ProductCategoryModel';
 
@@ -19,6 +20,7 @@ class ProductModel {
   title: string;
   description: string;
   price: number;
+  discountPercent: number;
   category: ProductCategoryModel | null = null;
   images: Image[] = [];
 
@@ -28,6 +30,7 @@ class ProductModel {
     this.title = data.title;
     this.description = data.description;
     this.price = data.price;
+    this.discountPercent = data.discountPercent;
     if (data.productCategory) {
       this.category = new ProductCategoryModel(data.productCategory);
     }
@@ -44,8 +47,12 @@ class ProductModel {
     return this.category?.title;
   }
 
+  get discountedPrice(): number {
+    return this.price * (1 - this.discountPercent / 100);
+  }
+
   get formattedPrice(): string {
-    return `$${this.price.toFixed(2)}`;
+    return formatPrice(this.price);
   }
 }
 

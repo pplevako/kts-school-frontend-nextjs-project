@@ -1,4 +1,5 @@
 @use '@/styles/variables' as vars;
+@use '@/styles/mixins' as *;
 
 .filters {
   display: flex;
@@ -20,4 +21,9 @@
 
 .categories {
   align-self: flex-start;
+  width: 368px;
+
+  @include respond(sm) {
+    width: 100%;
+  }
 }

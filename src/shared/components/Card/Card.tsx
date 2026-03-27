@@ -70,11 +70,7 @@ const Card: React.FC<CardProps> = ({
         </div>
         {contentSlot || actionSlot ? (
           <div className="card-footer">
-            <div className="card-content">
-              <Text view="p-18" weight="bold">
-                {contentSlot}
-              </Text>
-            </div>
+            <div className="card-content">{contentSlot}</div>
             <div className="card-action">{actionSlot}</div>
           </div>
         ) : null}

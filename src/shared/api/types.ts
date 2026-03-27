@@ -19,6 +19,7 @@ export type StrapiProduct = {
   title: string;
   description: string;
   price: number;
+  discountPercent: number;
   images?: StrapiImage[];
   productCategory?: StrapiCategory;
 };

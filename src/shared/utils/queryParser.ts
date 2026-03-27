@@ -7,7 +7,9 @@ export function parseNumberParam(
   return isNaN(parsed) ? defaultValue : parsed;
 }
 
-export function parseArrayParam<T>(value: T | T[] | undefined): T[] {
+export function parseArrayParam<T extends string>(value: T | T[] | undefined): T[] {
   if (!value) return [];
-  return Array.isArray(value) ? value : [value];
+  if (Array.isArray(value)) return value;
+  // Handle comma-separated values
+  return value.split(',').filter(Boolean) as T[];
 }
